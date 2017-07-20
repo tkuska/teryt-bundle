@@ -1,0 +1,23 @@
+{
+    "name": "tkuska/teryt-bundle",
+    "type": "symfony-bundle",
+    "description": "Teryt Bundle for Symfony2 framework",
+    "keywords": ["teryt"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomasz Kuśka",
+            "email": "tomasz.kuska@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9 || ^7.0",
+        "symfony/form": "^2.8 || ^3.0",
+        "symfony/framework-bundle": "^2.8 || ^3.0",
+    },
+    "autoload": {
+        "psr-0": { "Tkuska\\TerytBundle": "" }
+    },
+    "minimum-stability": "stable",
+    "target-dir": "Tkuska/TerytBundle"
+}

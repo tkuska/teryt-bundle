@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+        <services>
+            <service id="form.type.wojewodztwo" class="Tkuska\TerytBundle\Form\Type\WojewodztwoType">
+                <tag name="form.type" alias="wojewodztwo" />
+            </service>
+            <service id="form.type.gmina" class="Tkuska\TerytBundle\Form\Type\GminaType">
+                <tag name="form.type" alias="gmina" />
+            </service>
+            <service id="form.type.miejscowosc" class="Tkuska\TerytBundle\Form\Type\MiejscowoscType">
+                <tag name="form.type" alias="miejscowosc" />
+            </service>
+            <service id="form.type.powiat" class="Tkuska\TerytBundle\Form\Type\PowiatType">
+                <tag name="form.type" alias="powiat" />
+            </service>
+            <service id="form.type.ulica" class="Tkuska\TerytBundle\Form\Type\UlicaType">
+                <tag name="form.type" alias="ulica" />
+            </service>
+        </services>
+</container>

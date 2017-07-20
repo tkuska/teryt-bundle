@@ -1,0 +1,232 @@
+
+{% block wojewodztwo_widget %}
+    {% spaceless %}
+    {{ form_widget(form) }}
+        <script>
+            var wojewodztwo_cache = {};
+            $("#{{ id }}").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    var term = request.term;
+                    if (term in wojewodztwo_cache) {
+                        response(wojewodztwo_cache[ term ]);
+                        return;
+                    }
+                    $.getJSON(Routing.generate('teryt_wojewodztwa', {term: term}), function (data, status, xhr) {
+                        wojewodztwo_cache[ term ] = data;
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.nazwa);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.nazwa);
+                    $("#{{ id }}").data("kod", ui.item.woj);
+                    return false;
+                }
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                return $("<li>")
+                        .append("<a><span class='teryt-nazwa'>" + item.nazwa + "</span><br><span class='teryt-opis'>" + item.nazdod + "</span></a>")
+                        .appendTo(ul);
+            };
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{% block gmina_widget %}
+    {% spaceless %}
+    {{ form_widget(form) }}
+        <script>
+
+            var gmina_cache = {};
+            $("#{{ id }}").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    var term = request.term;
+                    if (term in gmina_cache) {
+                        response(gmina_cache[ term ]);
+                        return;
+                    }
+                    $.getJSON(Routing.generate('teryt_gminy', {term: term}), function (data, status, xhr) {
+                        gmina_cache[ term ] = data;
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.nazwa);
+                    $("#{{ id }}").data("gmi", ui.item.gmi);
+                    $("#{{ id }}").data("woj", ui.item.woj);
+                    $("#{{ id }}").data("pow", ui.item.pow);
+                    $("#{{ id }}").data("rodz", ui.item.rodz);
+            {% if wojewodztwoid is defined %} 
+                    $("#{{ wojewodztwoid }}").val(ui.item.wojewodztwo);
+                    $("#{{ wojewodztwoid }}").data("woj", ui.item.woj);
+            {% endif %}
+            {% if powiatid is defined %} 
+                        $("#{{ powiatid }}").val(ui.item.powiat);
+                        $("#{{ powiatid }}").data("woj", ui.item.woj);
+                        $("#{{ powiatid }}").data("pow", ui.item.pow);
+            {% endif %}
+                        return false;
+                    }
+                }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                            .append("<a><span class='teryt-nazwa'>" + item.nazwa + "</span><br><span class='teryt-opis'>" + item.nazdod + "</span></a>")
+                            .appendTo(ul);
+                };
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{% block powiat_widget %}
+    {% spaceless %}
+    {{ form_widget(form) }}
+    <script>
+            var powiat_cache = {};
+            $("#{{ id }}").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    var term = request.term;
+                    if (term in powiat_cache) {
+                        response(powiat_cache[ term ]);
+                        return;
+                    }
+                    $.getJSON(Routing.generate('teryt_powiaty', {term: term}), function (data, status, xhr) {
+                        powiat_cache[ term ] = data;
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.nazwa);
+                    $("#{{ id }}").data("woj", ui.item.woj);
+                    $("#{{ id }}").data("pow", ui.item.pow);
+            {% if wojewodztwoid is defined%} 
+                    $("#{{ wojewodztwoid }}").val(ui.item.wojewodztwo);
+                    $("#{{ wojewodztwoid }}").data("woj", ui.item.woj);
+            {% endif %}
+                        return false;
+                    }
+                }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                            .append("<a><span class='teryt-nazwa'>" + item.nazwa + "</span><br><span class='teryt-opis'>" + item.nazdod + "</span></a>")
+                            .appendTo(ul);
+                };
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{% block miejscowosc_widget %}
+    {% spaceless %}
+    {{ form_widget(form) }}
+        <script>
+
+            var miejscowosc_cache = {};
+            $("#{{ id }}").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    var term = request.term;
+                    if (term in miejscowosc_cache) {
+                        response(miejscowosc_cache[ term ]);
+                        return;
+                    }
+                    $.getJSON(Routing.generate('teryt_miasta', {term: term}), function (data, status, xhr) {
+                        miejscowosc_cache[ term ] = data;
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.nazwa);
+                    $("#{{ id }}").data("woj", ui.item.woj);
+                    $("#{{ id }}").data("pow", ui.item.pow);
+                    $("#{{ id }}").data("gmi", ui.item.gmi);
+                    $("#{{ id }}").data("rodz", ui.item.rodzgmi);
+            {% if wojewodztwoid is defined %} 
+                    $("#{{ wojewodztwoid }}").val(ui.item.wojewodztwo);
+                    $("#{{ wojewodztwoid }}").data("woj", ui.item.woj);
+            {% endif %}
+            {% if powiatid is defined %} 
+                        $("#{{ powiatid }}").val(ui.item.powiat);
+                        $("#{{ powiatid }}").data("woj", ui.item.woj);
+                        $("#{{ powiatid }}").data("pow", ui.item.pow);
+            {% endif %}
+            {% if gminaid is defined %} 
+                        $("#{{ gminaid }}").val(ui.item.gmina);
+                        $("#{{ gminaid }}").data("woj", ui.item.woj);
+                        $("#{{ gminaid }}").data("pow", ui.item.pow);
+                        $("#{{ gminaid }}").data("gmi", ui.item.gmi);
+                        $("#{{ gminaid }}").data("rodzgmi", ui.item.rodzgmi);
+            {% endif %}
+
+                        return false;
+                    }
+                }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                            .append("<a><span class='teryt-nazwa'>" + item.nazwa + "</span><br><span class='teryt-opis'>gm. " + item.gmina + ", pow." + item.powiat + ", woj. " + item.wojewodztwo + "</span></a>")
+                            .appendTo(ul);
+                };
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{% block ulica_widget %}
+    {% spaceless %}
+    {{ form_widget(form) }}
+        <script>
+            var woj,
+                    pow,
+                    gmi,
+                    rodz;
+
+            var ulica_cache = {};
+            $("#{{ id }}").autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    var term = request.term,
+                    woj = $("#{{ miejscowoscid }}").data("woj");
+                    pow = $("#{{ miejscowoscid }}").data("pow");
+                    gmi = $("#{{ miejscowoscid }}").data("gmi");
+                    rodzgmi = $("#{{ miejscowoscid }}").data("rodz");
+                    if (term in ulica_cache) {
+                        response(ulica_cache[ term ]);
+                        return;
+                    }
+                    $.getJSON(Routing.generate('teryt_ulice', {term: term, wojewodztwo: woj, powiat: pow, gmina: gmi, rodzaj_gminy: rodzgmi}), function (data, status, xhr) {
+                        ulica_cache[ term ] = data;
+                        response(data);
+                    });
+                },
+                focus: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.label);
+                    return false;
+                },
+                select: function (event, ui) {
+                    $("#{{ id }}").val(ui.item.cecha + ui.item.nazwa_2 + ui.item.nazwa_1);
+                    $("#{{ id }}").data("woj", ui.item.woj);
+                    $("#{{ id }}").data("pow", ui.item.pow);
+                    $("#{{ id }}").data("gmi", ui.item.gmi);
+                    $("#{{ id }}").data("rodz", ui.item.rodz_gmi);
+
+                    return false;
+                }
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                return $("<li>")
+                        .append("<a><span class='teryt-nazwa'>" + item.cecha + " " + item.nazwa_1 + "</span><br><span class='teryt-opis'>" + item.nazwa_2 + "</span></a>")
+                        .appendTo(ul);
+            };
+        </script>
+    {% endspaceless %}
+{% endblock %}

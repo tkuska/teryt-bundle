@@ -1,0 +1,23 @@
+/* 
+    Document   : main
+    Created on : 2013-04-09, 18:37:36
+    Author     : Tomekk
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.teryt-opis{
+    font-size: 10px;
+    padding: 0px!important;
+    margin: 0px!important;
+}
+
+.teryt-nazwa{
+    font-size: 14px;
+    padding:0px;
+    margin:0px;
+}
+
+.ui-autocomplete-loading {
+    background: url('../images/ajax-loader.gif') white right center no-repeat;
+}
