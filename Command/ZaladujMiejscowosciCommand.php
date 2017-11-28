@@ -54,8 +54,21 @@ class ZaladujMiejscowosciCommand extends ContainerAwareCommand
             $class->loadDataFromArray($wiersz);
             $this->em->persist($class);
         }
+                
         $this->em->flush();
-        $this->em->flush();
+        $output->writeln('<info>Pomyślnie zaimportowano miejscowości.</info>');
+        
+        $this->em->getRepository('TkuskaTerytBundle:Miejscowosc')
+                ->dolaczMiejscowosciDoWojewodztw();
+        $output->writeln('<info>Powiązano miejscowości z województwami.</info>');
+
+        $this->em->getRepository('TkuskaTerytBundle:Miejscowosc')
+                ->dolaczMiejscowosciDoPowiatow();
+        $output->writeln('<info>Powiązano miejscowości z powiatami.</info>');
+
+        $this->em->getRepository('TkuskaTerytBundle:Miejscowosc')
+                ->dolaczMiejscowosciDoGmin();       
+        $output->writeln('<info>Powiązano miejscowości z gminami.</info>'); 
     }
 
     /**

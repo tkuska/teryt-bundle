@@ -55,10 +55,10 @@ class GminaRepository extends EntityRepository
     public function dolaczGminyDoWojewodztw()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_gminy` g 
-            SET  `wojewodztwo_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_wojewodztwa` w
+        $this->_em->createNativeQuery('UPDATE teryt_gminy g 
+            SET  wojewodztwo_id = ( 
+            SELECT  id
+            FROM  teryt_wojewodztwa w
             WHERE w.WOJ = g.WOJ)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }
@@ -71,10 +71,10 @@ class GminaRepository extends EntityRepository
     public function dolaczGminyDoPowiatow()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_gminy` g 
-            SET  `powiat_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_powiaty` p
+        $this->_em->createNativeQuery('UPDATE teryt_gminy g 
+            SET  powiat_id = ( 
+            SELECT  id 
+            FROM  teryt_powiaty p
             WHERE p.WOJ = g.WOJ AND p.POW = g.POW)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }

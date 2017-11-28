@@ -61,10 +61,10 @@ class MiejscowoscRepository extends EntityRepository
     public function dolaczMiejscowosciDoWojewodztw()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_miejscowosci` m 
-            SET  `wojewodztwo_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_wojewodztwa` w
+        $this->_em->createNativeQuery('UPDATE teryt_miejscowosci m 
+            SET  wojewodztwo_id = ( 
+            SELECT  id 
+            FROM  teryt_wojewodztwa w
             WHERE w.WOJ = m.WOJ)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }
@@ -77,10 +77,10 @@ class MiejscowoscRepository extends EntityRepository
     public function dolaczMiejscowosciDoPowiatow()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_miejscowosci` m 
-            SET  `powiat_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_powiaty` p
+        $this->_em->createNativeQuery('UPDATE teryt_miejscowosci m 
+            SET  powiat_id = ( 
+            SELECT  id 
+            FROM  teryt_powiaty p
             WHERE p.WOJ = m.WOJ AND p.POW = m.POW)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }
@@ -93,10 +93,10 @@ class MiejscowoscRepository extends EntityRepository
     public function dolaczMiejscowosciDoGmin()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_miejscowosci` m 
-            SET  `gmina_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_gminy` p
+        $this->_em->createNativeQuery('UPDATE teryt_miejscowosci m 
+            SET  gmina_id = ( 
+            SELECT  id 
+            FROM  teryt_gminy p
             WHERE p.WOJ = m.WOJ AND p.POW = m.POW AND p.GMI = m.GMI AND p.RODZ = m.RODZ_GMI)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }

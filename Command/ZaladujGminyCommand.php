@@ -65,6 +65,24 @@ class ZaladujGminyCommand extends ContainerAwareCommand
             $this->em->persist($class);
         }
         $this->em->flush();
+        
+        $output->writeln('<info>Pomyślnie zaimportowano powiaty, gminy oraz województwa.</info>');
+        
+        $this->em->getRepository('TkuskaTerytBundle:Powiat')
+                ->dolaczPowiatyDoWojewodztw();
+        
+        $output->writeln('<info>Powiązano powiaty z województwami.</info>');
+
+        $this->em->getRepository('TkuskaTerytBundle:Gmina')
+                ->dolaczGminyDoWojewodztw();
+        
+        $output->writeln('<info>Powiązano gminy z województwami.</info>');
+
+        $this->em->getRepository('TkuskaTerytBundle:Gmina')
+                ->dolaczGminyDoPowiatow();
+                
+        $output->writeln('<info>Powiązano gminy z powiatami.</info>');
+        
     }
 
     /**

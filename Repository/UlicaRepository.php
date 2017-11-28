@@ -63,10 +63,10 @@ class UlicaRepository extends EntityRepository
     public function dolaczUliceDoMiejscowosci()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_ulice` u 
-            SET  `miejscowosc_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_miejscowosci` m
+        $this->_em->createNativeQuery('UPDATE teryt_ulice u 
+            SET  miejscowosc_id = ( 
+            SELECT  id 
+            FROM  teryt_miejscowosci m
             WHERE u.WOJ = m.WOJ AND u.POW = m.POW AND u.GMI = m.GMI AND u.RODZ_GMI = m.RODZ_GMI AND m.SYM = u.SYM)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }

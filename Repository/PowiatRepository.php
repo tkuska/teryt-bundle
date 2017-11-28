@@ -51,10 +51,10 @@ class PowiatRepository extends EntityRepository
     public function dolaczPowiatyDoWojewodztw()
     {
         $rsm = new ResultSetMapping();
-        $this->_em->createNativeQuery('UPDATE  `teryt_powiaty` p 
-            SET  `wojewodztwo_id` = ( 
-            SELECT  `id` 
-            FROM  `teryt_wojewodztwa` w
+        $this->_em->createNativeQuery('UPDATE teryt_powiaty p 
+            SET  wojewodztwo_id = ( 
+            SELECT  id 
+            FROM  teryt_wojewodztwa w
             WHERE w.WOJ = p.WOJ)', $rsm)
                 ->getResult(AbstractQuery::HYDRATE_SCALAR);
     }

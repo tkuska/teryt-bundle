@@ -87,37 +87,4 @@ class TerytController extends Controller
 
         return new JsonResponse($entities);
     }
-
-    /**
-     * @Route("/powiaz_teryt", name="powiaz")
-     */
-    public function powiazAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $em->getRepository('TkuskaTerytBundle:Miejscowosc')
-                ->dolaczMiejscowosciDoWojewodztw();
-
-        $em->getRepository('TkuskaTerytBundle:Miejscowosc')
-                ->dolaczMiejscowosciDoPowiatow();
-
-        $em->getRepository('TkuskaTerytBundle:Miejscowosc')
-                ->dolaczMiejscowosciDoGmin();
-
-        $em->getRepository('TkuskaTerytBundle:Ulica')
-                ->dolaczUliceDoMiejscowosci();
-
-        $em->getRepository('TkuskaTerytBundle:Powiat')
-                ->dolaczPowiatyDoWojewodztw();
-
-        $em->getRepository('TkuskaTerytBundle:Gmina')
-                ->dolaczGminyDoWojewodztw();
-
-        $em->getRepository('TkuskaTerytBundle:Gmina')
-                ->dolaczGminyDoPowiatow();
-
-        $em->flush();
-
-        return new JsonResponse('poszło');
-    }
 }

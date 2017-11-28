@@ -65,8 +65,13 @@ class ZaladujUliceCommand extends ContainerAwareCommand
                 $i = 0;
             }
         }
-
         $this->em->flush();
+        $output->writeln('<info>Pomyślnie zaimportowano ulice.</info>');
+
+        $this->em->getRepository('TkuskaTerytBundle:Ulica')
+                ->dolaczUliceDoMiejscowosci();
+        
+        $output->writeln('<info>Powiązano ulice z miejscowosciami.</info>');
     }
 
     /**
