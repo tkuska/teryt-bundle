@@ -20,5 +20,14 @@
             <service id="form.type.ulica" class="Tkuska\TerytBundle\Form\Type\UlicaType">
                 <tag name="form.type" alias="ulica" />
             </service>
+            <service id="command.load.gminy" class="Tkuska\TerytBundle\Command\ZaladujGminyCommand">
+                <tag name="console.command" />
+            </service>
+            <service id="command.load.miejscowosci" class="Tkuska\TerytBundle\Command\ZaladujMiejscowosciCommand">
+                <tag name="console.command" />
+            </service>
+            <service id="command.load.ulice" class="Tkuska\TerytBundle\Command\ZaladujUliceCommand">
+                <tag name="console.command" />
+            </service>
         </services>
 </container>
